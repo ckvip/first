@@ -1,14 +1,15 @@
 import {BaseAction} from "./baseAction";
 import {Constants} from "../../shared/constants";
+import {NamingRule} from "../../shared/models/namingRuleCollection";
 
 
 export class NamingRuleLoad extends BaseAction {
     type = Constants().actionTypes.namingRuleLoad;
 }
 
-export class NamingRuleAdd extends BaseAction {
-    type = Constants().actionTypes.namingRuleAdd;
-}
+export const NamingRuleAdd = (payload: NamingRule) => {
+    return {type : Constants().actionTypes.namingRuleAdd, payload}
+};
 
 export class NamingRuleDisable extends BaseAction {
     type = Constants().actionTypes.namingRuleDisable;
@@ -18,6 +19,6 @@ export class NamingRuleEnable extends BaseAction {
     type = Constants().actionTypes.namingRuleEnable;
 }
 
-export class NamingRuleRemove extends BaseAction {
-    type = Constants().actionTypes.namingRuleRemove;
-}
+export const NamingRuleRemove = (payload: NamingRule) => {
+    return {type: Constants().actionTypes.namingRuleRemove, payload};
+};

@@ -1,20 +1,18 @@
 import {BaseAction} from "../actions/baseAction";
-import {AppState} from "../../shared/models/appState";
-import {Name} from "../../shared/models/nameCollection";
+import {NameCollection} from "../../shared/models/nameCollection";
 import {Constants} from "../../shared/constants";
 
-const nameReducer = (state: AppState = new AppState(), action: BaseAction): Name[] | void => {
+const nameReducer = (state: NameCollection = new NameCollection(), action: BaseAction): NameCollection => {
     const types = Constants().actionTypes;
-    switch (action.type) {
-        case types.namingRuleAdd:
-            state.names.add(action.payload);
+    switch (action?.type) {
+        case types.nameAdd:
+            state.add(action.payload);
             break;
-        case types.namingRuleRemove:
-            state.names.remove(action.payload);
+        case types.nameRemove:
+            state.remove(action.payload);
             break;
-        default:
-            return state.names.getData();
     }
+    return state;
 };
 
 export default nameReducer;

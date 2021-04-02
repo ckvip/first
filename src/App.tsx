@@ -10,12 +10,15 @@ import logo from './logo.svg';
 import './App.css';
 import {Layout, Menu} from "antd";
 import appRoutes from "./appRoutes";
+import {RootState} from "./redux/reducers";
+import {connect} from "react-redux";
 const { Header, Content, Footer } = Layout;
 
 class App extends React.Component {
     render() {
         const linkIndex = appRoutes.findIndex(x => x.path === window.location.pathname);
         const activeLink = linkIndex > -1 ? [linkIndex.toString()] : ['0'];
+        console.log(this.props);
         return (
             <Router>
                 <Layout>
@@ -35,8 +38,7 @@ class App extends React.Component {
                                 <Redirect to="/names"/>
                             </Route>
                             {appRoutes.map((route: any, i) => (
-                                <Route key={i} path={route.path}>
-                                    {React.createElement(route.components)}
+                                <Route key={i} path={route.path} component={route.component}>
                                 </Route>
                             ))}
                         </Switch>
@@ -46,5 +48,8 @@ class App extends React.Component {
             </Router>);
     }
 }
+function mapStoreToProps(state: RootState ) {
+    return {state};
+}
 
-export default App;
+export const ConnectedApp =  connect(mapStoreToProps)(App);

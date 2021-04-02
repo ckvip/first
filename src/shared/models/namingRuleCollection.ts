@@ -4,21 +4,30 @@ import {NamingRuleType} from "../types";
 export class NamingRuleCollection extends BaseCollection<NamingRule> {
     constructor() {
         super('NamingRule');
-        if (!this.getData().length) {
+    }
+    static initData(): NamingRuleCollection {
+        const initData = new NamingRuleCollection();
+        if (!initData.getData().length) {
             const rule = new NamingRule();
             rule.name = 'Default Rule';
             rule.value.push({type: 'FreeText', value: ''});
-            this.add(rule);
+            initData.add(rule);
         }
-        console.log(this.getData());
+        return initData;
     }
     disable(item: NamingRule) {
-        this.getById(item.id).disabled = true;
-        this.save();
+        const found = this.getById(item.id);
+        if (found) {
+            found.disabled = true;
+            this.save();
+        }
     }
     enable(item: NamingRule) {
-        this.getById(item.id).disabled = false;
-        this.save();
+        const found = this.getById(item.id);
+        if (found) {
+            found.disabled = false;
+            this.save();
+        }
     }
 }
 

@@ -17,8 +17,8 @@ export abstract class BaseCollection<T> {
         return this.data;
     }
 
-    getById(id: number): T {
-        return this.data.find((x: any) => x.id === id) || {} as T;
+    getById(id: number): T | undefined {
+        return this.data.find((x: any) => x.id === id);
     }
 
     exists(id: number): boolean {
