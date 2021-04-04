@@ -1,6 +1,7 @@
-# Getting Started with Create React App
+# Naming Rule Management
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was built by react, react-router, react-redux, ant design, TypeScript.\
+Live demo at [Demo](https://ckvip.github.io/naming-rule).
 
 ## Available Scripts
 
@@ -22,8 +23,8 @@ information.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Builds the app for production to the `published` folder.\
+All build configurations are in the `.env.production` file.
 
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
