@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/naming-rule/static/css/main.85fa1456.chunk.css",
-    "main.js": "/naming-rule/static/js/main.d2cf05be.chunk.js",
+    "main.js": "/naming-rule/static/js/main.3a4278cc.chunk.js",
     "runtime-main.js": "/naming-rule/static/js/runtime-main.79c09296.js",
     "static/css/2.9227975c.chunk.css": "/naming-rule/static/css/2.9227975c.chunk.css",
     "static/js/2.41affd83.chunk.js": "/naming-rule/static/js/2.41affd83.chunk.js",
@@ -15,6 +15,6 @@
     "static/css/2.9227975c.chunk.css",
     "static/js/2.41affd83.chunk.js",
     "static/css/main.85fa1456.chunk.css",
-    "static/js/main.d2cf05be.chunk.js"
+    "static/js/main.3a4278cc.chunk.js"
   ]
 }
