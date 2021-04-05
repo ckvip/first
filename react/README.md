@@ -23,7 +23,7 @@ information.
 
 ### `npm run build`
 
-Builds the app for production to the `published` folder.\
+Builds the app for production to the `docs` folder because the GitHub pages support this folder only.\
 All build configurations are in the `.env.production` file.
 
 The build is minified and the filenames include the hashes.\
