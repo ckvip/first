@@ -1,9 +1,10 @@
 import { StorageType } from "../types";
 import { StorageProvider } from "../storageProvider";
+import { message } from 'antd'
 
 export abstract class BaseCollection<T> {
   private readonly storageType: StorageType;
-  private data: T[];
+  private readonly data: T[];
 
   protected constructor(type: StorageType, data: T[]) {
     this.storageType = type;
@@ -12,10 +13,6 @@ export abstract class BaseCollection<T> {
 
   get items(): T[] {
     return this.data;
-  }
-
-  filter(filterFn: any) {
-    this.data = filterFn(this.data);
   }
 
   save() {
@@ -34,6 +31,7 @@ export abstract class BaseCollection<T> {
     if (!this.exists(item.id)) {
       this.data.push(item);
       this.save();
+      message.success(`${this.storageType} was added successfully.`).then();
     }
   }
 
@@ -42,6 +40,7 @@ export abstract class BaseCollection<T> {
     if (index > -1) {
       this.data.splice(index, 1);
       this.save();
+      message.success(`${this.storageType} was removed successfully.`).then();
     }
   }
 }
