@@ -39,21 +39,21 @@ export class NameDetails extends React.Component<Props, State> {
       switch (x.type) {
         case 'FreeText':
         case 'FixedValue':
-          if (x.value) {
-            preName.push(x.value)
-          }
+          preName.push(x.value)
           break;
         default:
           const opt = x.value.split(',');
           if (opt.length) {
             preName.push(opt[0]);
+          } else {
+            preName.push('');
           }
       }
     });
     this.setState({selectedRule, selectedRuleId, preName});
   }
 
-  enumrationChanged = (v: string, i: number) => {
+  enumerationChanged = (v: string, i: number) => {
     const preName = this.state.preName;
     preName[i] = v;
     this.setState({preName});
@@ -65,7 +65,7 @@ export class NameDetails extends React.Component<Props, State> {
              visible={true}
              onOk={() => {
                const item = this.state.item;
-               item.name = this.state.preName.join('-');
+               item.name = this.state.preName.filter(x => !!x).join('-');
                this.props.onSubmit(item)
              }}
              okButtonProps={{disabled: !this.state.preName.length}}
@@ -85,7 +85,7 @@ export class NameDetails extends React.Component<Props, State> {
                   input = null;
                 }
                 input = <Select options={opt.map(x => ({label: x, value: x}))} defaultValue={opt[0]}
-                                onChange={(o) => this.enumrationChanged(o, i)}/>;
+                                onChange={(o) => this.enumerationChanged(o, i)}/>;
                 break;
               case 'FixedValue':
                 input = <span>{v.value}</span>;
