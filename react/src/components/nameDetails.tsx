@@ -1,6 +1,6 @@
 import React from "react";
 import { NamingRule, Rule } from '../shared/models/namingRuleCollection';
-import { Form, Input, Modal, Select } from 'antd';
+import { Alert, Form, Input, Modal, Select } from 'antd';
 import { Name } from '../shared/models/nameCollection';
 
 interface Props {
@@ -103,6 +103,7 @@ export class NameDetails extends React.Component<Props, State> {
               </Form.Item>)
           })}
         </Form>
+        <Alert message={'Name Preview: ' + this.state.preName.filter(x => !!x).join('-')} type="success"></Alert>
       </Modal>)
   }
 }
