@@ -48,12 +48,25 @@ export class NamingRuleDetails extends React.Component<Props> {
     this.setState(item);
   }
 
+  getPlaceHolder = (type: NamingRuleType) => {
+    switch (type) {
+      case 'FixedValue':
+        return 'a fixed value';
+      case 'Enumeration':
+        return 'separate by comma like "a,b,c"';
+      default:
+        return 'a default value';
+    }
+
+  }
+
   render() {
     const ruleTypes = ['FreeText', 'Enumeration', 'FixedValue'];
 
     return (
       <Modal title={this.props.title}
              visible={true}
+             width={600}
              onOk={() => this.props.onSubmit(this.state)}
              okButtonProps={{disabled: !this.state.name}}
              onCancel={this.props.onCancel}>
@@ -72,13 +85,15 @@ export class NamingRuleDetails extends React.Component<Props> {
           {this.state.value.map((v, i) => {
             return (<Form.Item label="Rule" labelCol={{span: 4}} key={'detailRule' + i}>
               <Space>
-                <Select key={'select' + i} defaultValue="FreeText" value={v.type} style={{width: 140}}
+                <Select defaultValue="FreeText" value={v.type} style={{width: 130}}
                         options={ruleTypes.map(x => ({label: x, value: x}))}
                         onChange={(e) => this.ruleTypeChanged(e, i)}/>
 
-                <Input name={'input' + i} key={'input' + i} value={v.value} onChange={(e) => this.ruleValueChanged(e.target.value, i)}/>
+                <Input name={'input' + i} value={v.value} style={{width: 300}}
+                       onChange={e => this.ruleValueChanged(e.target.value, i)}
+                       placeholder={this.getPlaceHolder(v.type)}/>
 
-                {i ? <MinusCircleOutlined key={'action' + i} onClick={() => this.removeRule(i)}/> : null}
+                {i ? <MinusCircleOutlined onClick={() => this.removeRule(i)}/> : null}
               </Space>
             </Form.Item>)
           })}

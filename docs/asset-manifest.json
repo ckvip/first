@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/naming-rule/static/css/main.85fa1456.chunk.css",
-    "main.js": "/naming-rule/static/js/main.cc3c80bb.chunk.js",
-    "runtime-main.js": "/naming-rule/static/js/runtime-main.79c09296.js",
+    "main.js": "/naming-rule/static/js/main.09ab01f6.chunk.js",
+    "runtime-main.js": "/naming-rule/static/js/runtime-main.9b988084.js",
     "static/css/2.9227975c.chunk.css": "/naming-rule/static/css/2.9227975c.chunk.css",
-    "static/js/2.41affd83.chunk.js": "/naming-rule/static/js/2.41affd83.chunk.js",
-    "static/js/3.fd9b52e8.chunk.js": "/naming-rule/static/js/3.fd9b52e8.chunk.js",
+    "static/js/2.95ecd349.chunk.js": "/naming-rule/static/js/2.95ecd349.chunk.js",
+    "static/js/3.7971d593.chunk.js": "/naming-rule/static/js/3.7971d593.chunk.js",
     "index.html": "/naming-rule/index.html",
-    "static/js/2.41affd83.chunk.js.LICENSE.txt": "/naming-rule/static/js/2.41affd83.chunk.js.LICENSE.txt",
+    "static/js/2.95ecd349.chunk.js.LICENSE.txt": "/naming-rule/static/js/2.95ecd349.chunk.js.LICENSE.txt",
     "static/media/logo.2d27ead7.svg": "/naming-rule/static/media/logo.2d27ead7.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.79c09296.js",
+    "static/js/runtime-main.9b988084.js",
     "static/css/2.9227975c.chunk.css",
-    "static/js/2.41affd83.chunk.js",
+    "static/js/2.95ecd349.chunk.js",
     "static/css/main.85fa1456.chunk.css",
-    "static/js/main.cc3c80bb.chunk.js"
+    "static/js/main.09ab01f6.chunk.js"
   ]
 }
