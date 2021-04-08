@@ -1,13 +1,13 @@
-import React from "react";
-import { connect } from "react-redux";
-import { NamingRule } from "../shared/models/namingRuleCollection";
+import React from 'react';
+import { connect } from 'react-redux';
+import { NamingRule } from '../shared/models/namingRuleCollection';
 import {
   NamingRuleAdd,
   NamingRuleDisable,
   NamingRuleEnable,
   NamingRuleRemove,
   NamingRuleSetFilter
-} from "../redux/actions/namingRuleAction";
+} from '../redux/actions/namingRuleAction';
 import { Button, List, Modal, Radio, Space, Switch } from 'antd';
 import { ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { NamingRuleDetails } from './namingRuleDetails';
@@ -30,7 +30,7 @@ class NamingRulesComponentPure extends React.Component<Props> {
 
   addNamingRule = (item: NamingRule) => {
     this.props.addRule(NamingRuleAdd(item));
-    this.setState({showDetails: false})
+    this.setState({showDetails: false});
   };
 
   setNamingRuleStatus = (item: NamingRule, enabled: boolean) => {
@@ -63,7 +63,7 @@ class NamingRulesComponentPure extends React.Component<Props> {
       filter.disabled = filterValue === 'disabled';
     }
     this.props.setFilter(NamingRuleSetFilter(filter));
-    this.setState({filter: e.target.value})
+    this.setState({filter: e.target.value});
   };
 
   render() {
@@ -71,24 +71,25 @@ class NamingRulesComponentPure extends React.Component<Props> {
       <Space>
         <label>Display:</label>
         <Radio.Group onChange={this.filterChanged} value={this.state.filter}>
-          <Radio value="all">All</Radio>
-          <Radio value="disabled">Disabled</Radio>
-          <Radio value="enabled">Enabled</Radio>
+          <Radio value='all'>All</Radio>
+          <Radio value='disabled'>Disabled</Radio>
+          <Radio value='enabled'>Enabled</Radio>
         </Radio.Group>
       </Space>
       <List dataSource={this.props.rules} renderItem={item => (
-        <List.Item actions={item.isBuildIn ?
-          [<Switch checkedChildren="已启用" checked size="small" disabled/>,
-            <div style={{width: 56}}>Build-in</div>] :
-          [<Switch checkedChildren="已启用" unCheckedChildren="已禁用" checked={!item.disabled}
-                   onChange={(v) => this.setNamingRuleStatus(item, v)} size="small"/>,
-            <Button type="link" size="small" danger onClick={() => this.delNamingRule(item)}>Delete</Button>]}>
+        <List.Item key={item.id} actions={item.isBuildIn ?
+          [<Switch key={'switch' + item.id} checkedChildren='已启用' checked={true} size='small' disabled={true}/>,
+            <div key={'div' + item.id} style={{width: 56}}>Build-in</div>] :
+          [<Switch key={'switch' + item.id} checkedChildren='已启用' unCheckedChildren='已禁用' checked={!item.disabled}
+                   onChange={(v) => this.setNamingRuleStatus(item, v)} size='small'/>,
+            <Button key={'button' + item.id} type='link' size='small' danger={true}
+                    onClick={() => this.delNamingRule(item)}>Delete</Button>]}>
           <List.Item.Meta title={item.name}
                           description={item.value.map(x => x.type + ': ' + (x.value || 'null')).join(', ')}/>
         </List.Item>
       )}
       />
-      <Button type="dashed" block icon={<PlusOutlined/>} onClick={() => this.setState({showDetails: true})}>
+      <Button type='dashed' block={true} icon={<PlusOutlined/>} onClick={() => this.setState({showDetails: true})}>
         Add a new Naming Rule
       </Button>
       {this.state.showDetails ?
@@ -105,11 +106,11 @@ const getVisibleRules = (state: RootState): NamingRule[] => {
     return state.namingRuleState.namingRules.items.filter((x: NamingRule) => x.disabled === disabled);
   }
   return state.namingRuleState.namingRules.items;
-}
+};
 const mapStoreToProps = (state: RootState) => {
   return {
     rules: getVisibleRules(state)
-  }
+  };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
@@ -120,7 +121,7 @@ const mapDispatchToProps = (dispatch: any) => {
     disableRule: dispatchActon,
     enableRule: dispatchActon,
     setFilter: dispatchActon
-  }
+  };
 };
 
 export const NamingRulesComponent = connect(mapStoreToProps, mapDispatchToProps)(NamingRulesComponentPure);

@@ -1,10 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Link, Redirect, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Link, Redirect, Route, Switch } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
-import { Layout, Menu } from "antd";
-import appRoutes from "./appRoutes";
-import { connect } from "react-redux";
+import { Layout, Menu } from 'antd';
+import appRoutes from './appRoutes';
+import { connect } from 'react-redux';
 import { AppState } from './shared/models/appState';
 
 const {Header, Content, Footer} = Layout;
@@ -19,8 +19,8 @@ class App extends React.Component {
       <Router>
         <Layout>
           <Header>
-            <img src={logo} className="App-logo" alt="logo"/>
-            <Menu theme="dark" mode="horizontal" className="app-menus" defaultSelectedKeys={activeLink}>
+            <img src={logo} className='App-logo' alt='logo'/>
+            <Menu theme='dark' mode='horizontal' className='app-menus' defaultSelectedKeys={activeLink}>
               {appRoutes.map((route: any, i) => (
                 <Menu.Item key={i}>
                   <Link to={parentPath + route.path}>{route.name}</Link>
@@ -29,11 +29,10 @@ class App extends React.Component {
             </Menu>
           </Header>
           <Content>
-            <div className="center-container">
+            <div className='center-container'>
               <Switch>
-                {appRoutes.map((route: any, i) => (
-                  <Route key={route.path} path={parentPath + route.path} component={route.component}>
-                  </Route>
+                {appRoutes.map((route: any) => (
+                  <Route key={route.path} path={parentPath + route.path} component={route.component}/>
                 ))}
                 <Route path={parentPath + '/'}>
                   <Redirect to={parentPath + '/names'}/>

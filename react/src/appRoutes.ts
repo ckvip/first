@@ -1,6 +1,6 @@
-import { NamesComponent } from "./components/nameList";
-import { NamingRulesComponent } from "./components/namingRuleList";
-import {AboutComponent} from "./components/about";
+import { NamesComponent } from './components/nameList';
+import { NamingRulesComponent } from './components/namingRuleList';
+import {AboutComponent} from './components/about';
 
 const appRoutes = [
   {path: '/names', name: 'Names', component: NamesComponent},

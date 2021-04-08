@@ -9,9 +9,9 @@ export class StorageProvider {
       if (value) {
         return JSON.parse(value);
       }
-      return []
+      return [];
     } catch (e) {
-      console.log(e);
+      console.error(e);
       return [];
     }
   }

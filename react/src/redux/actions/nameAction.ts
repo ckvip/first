@@ -1,14 +1,14 @@
-import { BaseAction } from "./baseAction";
-import { Constants } from "../../shared/constants";
+import { BaseAction } from './baseAction';
 import { Name } from '../../shared/models/nameCollection';
+import {ConstNameAdd, ConstNameRemove, ConstNameSetFilter} from '../../shared/constants';
 
 export const NameSetFilter = (payload: any): BaseAction => {
-  return {type: Constants().actionTypes.nameSetFilter, payload};
-}
+  return {type: ConstNameSetFilter, payload};
+};
 export const NameAdd = (payload: Name): BaseAction => {
-  return {type: Constants().actionTypes.nameAdd, payload};
-}
+  return {type: ConstNameAdd, payload};
+};
 export const NameRemove = (payload: Name): BaseAction => {
-  return {type: Constants().actionTypes.nameRemove, payload};
-}
+  return {type: ConstNameRemove, payload};
+};
 

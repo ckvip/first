@@ -1,7 +1,7 @@
-import { createStore } from "redux";
+import { createStore } from 'redux';
 import rootReducer from './reducers';
-import { NamingRuleCollection } from "../shared/models/namingRuleCollection";
-import { NameCollection } from "../shared/models/nameCollection";
+import { NamingRuleCollection } from '../shared/models/namingRuleCollection';
+import { NameCollection } from '../shared/models/nameCollection';
 import { AppState } from '../shared/models/appState';
 
 const initData = {
