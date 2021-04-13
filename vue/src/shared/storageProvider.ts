@@ -1,5 +1,5 @@
 export class StorageProvider {
-  static write (key: string, value: any): void {
+  static write<T> (key: string, value: T): void {
     localStorage.setItem(key, JSON.stringify(value))
   }
 

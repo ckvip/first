@@ -67,7 +67,7 @@ export class NamingRuleDetails extends React.Component<Props> {
              visible={true}
              width={600}
              onOk={() => this.props.onSubmit(this.state)}
-             okButtonProps={{disabled: !this.state.name}}
+             okButtonProps={{disabled: !this.state.name || this.state.value.some(x => x.type !== 'FreeText' && !x.value)}}
              onCancel={this.props.onCancel}>
         <Form>
           <Form.Item name='name' label='Name' labelCol={{span: 4}}

@@ -3,6 +3,11 @@ import { StorageProvider } from '../storageProvider'
 
 const storageKey = 'Name'
 
+export class Name {
+  id = new Date().getTime();
+  name = ''
+}
+
 export class NameCollection extends BaseCollection<Name> {
   constructor (data: Name[]) {
     super(storageKey, data)
@@ -10,16 +15,12 @@ export class NameCollection extends BaseCollection<Name> {
 
   static initData (): NameCollection {
     const storedData = StorageProvider.read<Name>(storageKey)
-    if (!storedData.length) {
+    const names = new NameCollection(storedData)
+    if (!names.items.length) {
       const n = new Name()
       n.name = 'abcd'
-      storedData.push(n)
+      names.add(n)
     }
-    return new NameCollection(storedData)
+    return names
   }
-}
-
-export class Name {
-  id = new Date().getTime();
-  name = ''
 }

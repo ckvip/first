@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import NameList from '@/views/names/NameList.vue'
+import NamingRuleList from '@/views/naming-rules/NamingRuleList.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -8,9 +9,9 @@ const routes: Array<RouteRecordRaw> = [
     component: NameList
   },
   {
-    path: '/',
-    name: 'Names',
-    component: NameList
+    path: '/naming-rules',
+    name: 'Naming Rules',
+    component: NamingRuleList
   },
   {
     path: '/about',
@@ -22,7 +23,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/',
-    redirect: '/homes'
+    redirect: '/names'
   }
 ]
 
@@ -30,5 +31,5 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
-
+export const availableRoutes = routes.filter(x => x.name)
 export default router

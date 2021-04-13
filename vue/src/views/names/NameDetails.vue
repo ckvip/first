@@ -1,65 +1,86 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router" target="_blank" rel="noopener">router</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-vuex" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript" target="_blank" rel="noopener">typescript</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
-  </div>
+  <a-modal :title="title" :visible="true" :ok-button-props="{disabled: !preName.some(x => x)}"
+  :on-cancel="cancel" @ok="save()">
+  <a-form>
+    <a-form-item name="template" label="Template" :labelCol="{span: 5}">
+      <a-select :defaultValue="selectedRuleId" @change="templateChanged($event)" class="fixed200"
+              :options="rules.filter(x => !x.disabled).map(x => ({label: x.name, value: x.id}))"/>
+    </a-form-item>
+    <a-form-item v-for="(rule, i) of selectedRule.value" :key="i" :label="rule.type" :labelCol="{span: 5}">
+      <a-select v-if="rule.type === 'Enumeration'" class="fixed200" :options="rule.value.split(',').map(x => ({label: x, value: x}))"
+      v-model:value="preName[i]"></a-select>
+      <span v-else-if="rule.type === 'FixedValue'">{{rule.value}}</span>
+      <a-input v-else v-model:value="preName[i]" class="fixed200"></a-input>
+    </a-form-item>
+  </a-form>
+  <a-alert :message="'Name Preview: ' + preName.filter(x => !!x).join('-')" type='success'></a-alert>
+  </a-modal>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component'
+import { Vue } from 'vue-class-component'
+import { Name } from '@/shared/models/nameCollection'
+import { Getter } from 'vuex-class'
+import { NamingRule } from '@/shared/models/namingRuleCollection'
 
-@Options({
-  props: {
-    msg: String
-  }
-})
 export default class NameDetails extends Vue {
-  msg!: string
+  title = ''
+  item: Name = new Name()
+  preName: string[] = []
+  selectedRuleId = 0
+  selectedRule: NamingRule = new NamingRule()
+  rules: NamingRule[] = []
+  emits = ['cancel', 'save']
+  props = {
+    title: { type: String, required: true, defaultValue: '' }
+  }
+
+  @Getter('getNamingRules') getNamingRules!:() => NamingRule[]
+
+  created (): void {
+    this.rules = this.getNamingRules()
+    this.selectedRule = this.rules[0]
+    this.selectedRuleId = this.selectedRule.id
+  }
+
+  templateChanged (id: number): void {
+    const found = this.rules.find(x => x.id === id)
+    if (!found) {
+      return
+    }
+    const preName: string[] = []
+    this.selectedRuleId = id
+    this.selectedRule = found
+    let opt = []
+    found.value.forEach(x => {
+      switch (x.type) {
+        case 'FreeText':
+        case 'FixedValue':
+          preName.push(x.value)
+          break
+        default:
+          opt = x.value.split(',')
+          if (opt.length) {
+            preName.push(opt[0])
+          }
+      }
+    })
+    this.preName = preName
+  }
+
+  save (): void {
+    this.item.name = this.preName.filter(x => x).join('-')
+    this.$emit('save', this.item)
+  }
+
+  cancel (): void {
+    this.$emit('cancel')
+  }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+  .fixed200 {
+    width: 200px;
+  }
 </style>

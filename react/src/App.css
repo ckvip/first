@@ -13,6 +13,7 @@
 
 .center-container {
     width: 68%;
+    max-width: 800px;
     margin: 20px auto 0 50px;
     padding: 15px;
     background: #fff;

@@ -4,6 +4,19 @@ import { StorageProvider } from '../storageProvider'
 
 const storageKey = 'NamingRule'
 
+export interface Rule {
+  type: NamingRuleType;
+  value: string;
+}
+
+export class NamingRule {
+  id = new Date().getTime()
+  name = ''
+  disabled = false
+  value: Rule[] = []
+  isBuildIn = false
+}
+
 export class NamingRuleCollection extends BaseCollection<NamingRule> {
   constructor (data: NamingRule[]) {
     super(storageKey, data)
@@ -22,7 +35,7 @@ export class NamingRuleCollection extends BaseCollection<NamingRule> {
     return initData
   }
 
-  disable (item: NamingRule) {
+  disable (item: NamingRule): void {
     const found = this.getById(item.id)
     if (found) {
       found.disabled = true
@@ -30,24 +43,11 @@ export class NamingRuleCollection extends BaseCollection<NamingRule> {
     }
   }
 
-  enable (item: NamingRule) {
+  enable (item: NamingRule): void {
     const found = this.getById(item.id)
     if (found) {
       found.disabled = false
       this.save()
     }
   }
-}
-
-export class NamingRule {
-  id = new Date().getTime();
-  name = '';
-  disabled = false;
-  value: Rule[] = [];
-  isBuildIn = false;
-}
-
-export interface Rule {
-  type: NamingRuleType;
-  value: string;
 }

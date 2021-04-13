@@ -1,4 +1,4 @@
-import { createStore, Store } from 'vuex'
+import { createStore } from 'vuex'
 import { Name, NameCollection } from '@/shared/models/nameCollection'
 import { NamingRule, NamingRuleCollection } from '@/shared/models/namingRuleCollection'
 import {
@@ -9,7 +9,6 @@ import {
   NamingRuleEnable,
   NamingRuleRemove
 } from '@/shared/constants'
-import { InjectionKey } from 'vue'
 
 const initState = {
   names: NameCollection.initData(),
@@ -20,22 +19,40 @@ export type RootState = typeof initState
 
 const consts = [NameAdd, NameRemove, NamingRuleAdd, NamingRuleRemove, NamingRuleDisable, NamingRuleEnable]
 
-const mutations = consts.reduce((prev: any, curr: string) => {
-  prev[curr] = (state: RootState, payload: NamingRule) => {
+const mutations = {
+  [NameAdd]: (state: RootState, payload: Name) => {
+    state.names.add(payload)
+    state.names.save()
+  },
+  [NameRemove]: (state: RootState, payload: Name) => {
+    state.names.remove(payload)
+    state.names.save()
+  },
+  [NamingRuleAdd]: (state: RootState, payload: NamingRule) => {
     state.namingRules.add(payload)
     state.namingRules.save()
+  },
+  [NamingRuleRemove]: (state: RootState, payload: NamingRule) => {
+    state.namingRules.remove(payload)
+    state.namingRules.save()
+  },
+  [NamingRuleDisable]: (state: RootState, payload: NamingRule) => {
+    state.namingRules.disable(payload)
+    state.namingRules.save()
+  },
+  [NamingRuleEnable]: (state: RootState, payload: NamingRule) => {
+    state.namingRules.enable(payload)
+    state.namingRules.save()
   }
-  return prev
-}, {} as any)
+}
 
 const actions = consts.reduce((prev: any, curr: string) => {
-  prev[curr] = ({ commit }: { commit: any }, payload: NamingRule) => {
+  prev[curr] = ({ commit }: { commit: any }, payload: any) => {
     commit(curr, payload)
   }
   return prev
 }, {} as any)
 
-export const key: InjectionKey<Store<RootState>> = Symbol('root-state')
 export default createStore<RootState>({
   state: initState,
   mutations,
@@ -46,7 +63,7 @@ export default createStore<RootState>({
         : state.names.items.filter((x: Name) => x.name.toLowerCase().startsWith(name.toLowerCase()))
     },
     getNamingRules: (state: RootState) => (disabled?: boolean) => {
-      return disabled === undefined ? state.namingRules
+      return disabled === undefined ? state.namingRules.items
         : state.namingRules.items.filter((x: NamingRule) => x.disabled === disabled)
     }
 

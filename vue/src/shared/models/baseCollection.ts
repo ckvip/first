@@ -27,16 +27,16 @@ export abstract class BaseCollection<T> {
     return !!this.getById(id)
   }
 
-  add (item: any): void {
-    if (!this.exists(item.id)) {
+  add (item: T): void {
+    if (!this.exists((item as any).id)) {
       this.data.push(item)
       this.save()
       message.success(`${this.storageType} was added successfully.`)
     }
   }
 
-  remove (item: any): void {
-    const index = this.data.findIndex((x: any) => x.id === item.id)
+  remove (item: T): void {
+    const index = this.data.findIndex((x: any) => x.id === (item as any).id)
     if (index > -1) {
       this.data.splice(index, 1)
       this.save()
