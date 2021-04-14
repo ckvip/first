@@ -34,7 +34,7 @@
     margin: 30px auto auto 50px;
     background: #fff;
     width: 68%;
-    max-width: 800px;
+    max-width: 900px;
     padding: 30px;
   }
 </style>
