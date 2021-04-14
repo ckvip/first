@@ -15,10 +15,10 @@ export class AboutComponent extends React.Component {
                         <td>React</td>
                         <td>
                             <p>
-                                GitHub: <a href='https://github.com/ckvip/naming-rule/react' target='code'> https://github.com/ckvip/naming-rule/react</a>
+                                GitHub: <a href='https://github.com/ckvip/naming-rule/tree/develop/react' target='code'> https://github.com/ckvip/naming-rule/react</a>
                             </p>
                             <p>
-                                Gitee: <a href='https://gitee.com/yoso2020/naming-rule/react' target='code'> https://gitee.com/yoso2020/naming-rule/react</a>
+                                Gitee: <a href='https://gitee.com/yoso2020/naming-rule/tree/develop/react' target='code'> https://gitee.com/yoso2020/naming-rule/react</a>
                             </p>
                         </td>
                         <td>
@@ -34,10 +34,10 @@ export class AboutComponent extends React.Component {
                         <td>Vue</td>
                         <td>
                             <p>
-                                GitHub: <a href='https://github.com/ckvip/naming-rule/vue' target='code'> https://github.com/ckvip/naming-rule/vue</a>
+                                GitHub: <a href='https://github.com/ckvip/naming-rule/tree/develop/vue' target='code'> https://github.com/ckvip/naming-rule/vue</a>
                             </p>
                             <p>
-                                Gitee: <a href='https://gitee.com/yoso2020/naming-rule/vue' target='code'> https://gitee.com/yoso2020/naming-rule/vue</a>
+                                Gitee: <a href='https://gitee.com/yoso2020/naming-rule/tree/develop/vue' target='code'> https://gitee.com/yoso2020/naming-rule/vue</a>
                             </p>
                         </td>
                         <td>
