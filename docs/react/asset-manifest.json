@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/naming-rule/react/static/css/main.6eb0df4d.chunk.css",
-    "main.js": "/naming-rule/react/static/js/main.878db6e9.chunk.js",
-    "runtime-main.js": "/naming-rule/react/static/js/runtime-main.2c172cb1.js",
+    "main.css": "/naming-rule/react/static/css/main.23ecb0c9.chunk.css",
+    "main.js": "/naming-rule/react/static/js/main.1ffc972c.chunk.js",
+    "runtime-main.js": "/naming-rule/react/static/js/runtime-main.8477b7ec.js",
     "static/css/2.9227975c.chunk.css": "/naming-rule/react/static/css/2.9227975c.chunk.css",
-    "static/js/2.8307d93c.chunk.js": "/naming-rule/react/static/js/2.8307d93c.chunk.js",
-    "static/js/3.7971d593.chunk.js": "/naming-rule/react/static/js/3.7971d593.chunk.js",
+    "static/js/2.76cd7826.chunk.js": "/naming-rule/react/static/js/2.76cd7826.chunk.js",
+    "static/js/3.9754be79.chunk.js": "/naming-rule/react/static/js/3.9754be79.chunk.js",
     "index.html": "/naming-rule/react/index.html",
-    "static/js/2.8307d93c.chunk.js.LICENSE.txt": "/naming-rule/react/static/js/2.8307d93c.chunk.js.LICENSE.txt",
+    "static/js/2.76cd7826.chunk.js.LICENSE.txt": "/naming-rule/react/static/js/2.76cd7826.chunk.js.LICENSE.txt",
     "static/media/logo.2d27ead7.svg": "/naming-rule/react/static/media/logo.2d27ead7.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.2c172cb1.js",
+    "static/js/runtime-main.8477b7ec.js",
     "static/css/2.9227975c.chunk.css",
-    "static/js/2.8307d93c.chunk.js",
-    "static/css/main.6eb0df4d.chunk.css",
-    "static/js/main.878db6e9.chunk.js"
+    "static/js/2.76cd7826.chunk.js",
+    "static/css/main.23ecb0c9.chunk.css",
+    "static/js/main.1ffc972c.chunk.js"
   ]
 }
