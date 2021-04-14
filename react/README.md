@@ -1,7 +1,7 @@
 # Naming Rule Management
 
 This project was built by react, react-router, react-redux, ant design, TypeScript.\
-Live demo at [Demo](https://ckvip.github.io/naming-rule).
+Live demo at [GitHub.com](https://ckvip.github.io/naming-rule/react) or [Gitee.com in China](https://yoso2020.gitee.io/naming-rule/react).
 
 ## Available Scripts
 
