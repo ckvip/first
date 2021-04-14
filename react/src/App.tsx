@@ -11,8 +11,7 @@ const {Header, Content, Footer} = Layout;
 
 class App extends React.Component {
   render() {
-    const parentPath = process.env.PUBLIC_URL || '';
-    const routePath = window.location.pathname.replace(parentPath, '');
+    const routePath = window.location.hash.replace('#', '');
     const linkIndex = appRoutes.findIndex(x => x.path === routePath);
     const activeLink = linkIndex > -1 ? [linkIndex.toString()] : ['0'];
     return (
@@ -23,7 +22,7 @@ class App extends React.Component {
             <Menu theme='dark' mode='horizontal' className='app-menus' defaultSelectedKeys={activeLink}>
               {appRoutes.map((route: any, i) => (
                 <Menu.Item key={i}>
-                  <Link to={parentPath + route.path}>{route.name}</Link>
+                  <Link to={route.path}>{route.name}</Link>
                 </Menu.Item>
               ))}
             </Menu>
@@ -32,10 +31,10 @@ class App extends React.Component {
             <div className='center-container'>
               <Switch>
                 {appRoutes.map((route: any) => (
-                  <Route key={route.path} path={parentPath + route.path} component={route.component}/>
+                  <Route key={route.path} path={route.path} component={route.component}/>
                 ))}
-                <Route path={parentPath + '/'}>
-                  <Redirect to={parentPath + '/names'}/>
+                <Route path={'/'}>
+                  <Redirect to={'/names'}/>
                 </Route>
               </Switch>
             </div>
