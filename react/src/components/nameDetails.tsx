@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import { NamingRule, Rule } from '../shared/models/namingRuleCollection';
 import { Alert, Form, Input, Modal, Select } from 'antd';
 import { Name } from '../shared/models/nameCollection';
@@ -14,7 +14,7 @@ interface State {
   item: Name;
   selectedRuleId: number;
   selectedRule: NamingRule;
-  preName: string[]
+  preName: string[];
 }
 
 export class NameDetails extends React.Component<Props, State> {
@@ -39,7 +39,7 @@ export class NameDetails extends React.Component<Props, State> {
       switch (x.type) {
         case 'FreeText':
         case 'FixedValue':
-          preName.push(x.value)
+          preName.push(x.value);
           break;
         default:
           const opt = x.value.split(',');
@@ -51,13 +51,13 @@ export class NameDetails extends React.Component<Props, State> {
       }
     });
     this.setState({selectedRule, selectedRuleId, preName});
-  }
+  };
 
   enumerationChanged = (v: string, i: number) => {
     const preName = this.state.preName;
     preName[i] = v;
     this.setState({preName});
-  }
+  };
 
   render() {
     return (
@@ -66,12 +66,12 @@ export class NameDetails extends React.Component<Props, State> {
              onOk={() => {
                const item = this.state.item;
                item.name = this.state.preName.filter(x => !!x).join('-');
-               this.props.onSubmit(item)
+               this.props.onSubmit(item);
              }}
              okButtonProps={{disabled: !this.state.preName.length}}
              onCancel={this.props.onCancel}>
         <Form>
-          <Form.Item name="template" label="Template" labelCol={{span: 5}}>
+          <Form.Item name='template' label='Template' labelCol={{span: 5}}>
             <Select defaultValue={this.state.selectedRuleId} onChange={this.templateChanged}
                     options={this.props.rules.map(x => ({label: x.name, value: x.id}))}/>
           </Form.Item>
@@ -84,26 +84,26 @@ export class NameDetails extends React.Component<Props, State> {
                 if (!!opt.length) {
                   input = null;
                 }
-                input = <Select options={opt.map(x => ({label: x, value: x}))} defaultValue={opt[0]}
+                input = <Select key={this.state.selectedRule.name + i} options={opt.map(x => ({label: x, value: x}))} defaultValue={opt[0]}
                                 onChange={(o) => this.enumerationChanged(o, i)}/>;
                 break;
               case 'FixedValue':
-                input = <span>{v.value}</span>;
+                input = <span key={this.state.selectedRule.name + i}>{v.value}</span>;
                 break;
-              default:
-                input = <Input defaultValue={v.value} onChange={(e) => {
+              case 'FreeText':
+                input = <Input key={this.state.selectedRule.name + i} defaultValue={v.value} onChange={(e) => {
                   const preName = this.state.preName;
                   preName[i] = e.target.value;
                   this.setState({preName});
-                }}></Input>
+                }}/>;
             }
             return (
               <Form.Item label={v.type} labelCol={{span: 5}} key={'detailRule' + i}>
                 {input}
-              </Form.Item>)
+              </Form.Item>);
           })}
         </Form>
-        <Alert message={'Name Preview: ' + this.state.preName.filter(x => !!x).join('-')} type="success"></Alert>
-      </Modal>)
+        <Alert message={'Name Preview: ' + this.state.preName.filter(x => !!x).join('-')} type='success'/>
+      </Modal>);
   }
 }

@@ -1,5 +1,5 @@
-import { BaseCollection } from "./baseCollection";
-import { NamingRuleType } from "../types";
+import { BaseCollection } from './baseCollection';
+import { NamingRuleType } from '../types';
 import { StorageProvider } from '../storageProvider';
 
 const storageKey = 'NamingRule';
@@ -10,7 +10,7 @@ export class NamingRuleCollection extends BaseCollection<NamingRule> {
   }
 
   static initData(): NamingRuleCollection {
-    const storedData = StorageProvider.read<NamingRule>(storageKey)
+    const storedData = StorageProvider.read<NamingRule>(storageKey);
     const initData = new NamingRuleCollection(storedData);
     if (!initData.items.length) {
       const rule = new NamingRule();

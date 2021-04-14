@@ -1,23 +1,28 @@
-import { Constants } from "../../shared/constants";
-import { NamingRule } from "../../shared/models/namingRuleCollection";
+import {
+  ConstNamingRuleAdd,
+  ConstNamingRuleDisable,
+  ConstNamingRuleEnable, ConstNamingRuleRemove,
+  ConstNamingRuleSetFilter
+} from '../../shared/constants';
+import { NamingRule } from '../../shared/models/namingRuleCollection';
 import { BaseAction } from './baseAction';
 
 export const NamingRuleSetFilter = (payload: { disabled: boolean }): BaseAction => {
-  return {type: Constants().actionTypes.namingRuleSetFilter, payload};
-}
+  return {type: ConstNamingRuleSetFilter, payload};
+};
 
 export const NamingRuleAdd = (payload: NamingRule): BaseAction => {
-  return {type: Constants().actionTypes.namingRuleAdd, payload};
+  return {type: ConstNamingRuleAdd, payload};
 };
 
 export const NamingRuleDisable = (payload: NamingRule): BaseAction => {
-  return {type: Constants().actionTypes.namingRuleDisable, payload};
+  return {type: ConstNamingRuleDisable, payload};
 };
 
 export const NamingRuleEnable = (payload: NamingRule): BaseAction => {
-  return {type: Constants().actionTypes.namingRuleEnable, payload};
-}
+  return {type: ConstNamingRuleEnable, payload};
+};
 
 export const NamingRuleRemove = (payload: NamingRule): BaseAction => {
-  return {type: Constants().actionTypes.namingRuleRemove, payload};
+  return {type: ConstNamingRuleRemove, payload};
 };

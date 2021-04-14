@@ -1,4 +1,4 @@
-import { BaseCollection } from "./baseCollection";
+import { BaseCollection } from './baseCollection';
 import { StorageProvider } from '../storageProvider';
 
 const storageKey = 'Name';
@@ -9,7 +9,7 @@ export class NameCollection extends BaseCollection<Name> {
   }
 
   static initData(): NameCollection {
-    const storedData = StorageProvider.read<Name>(storageKey)
+    const storedData = StorageProvider.read<Name>(storageKey);
     return new NameCollection(storedData);
   }
 }

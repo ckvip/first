@@ -1,6 +1,6 @@
-import { StorageType } from "../types";
-import { StorageProvider } from "../storageProvider";
-import { message } from 'antd'
+import { StorageType } from '../types';
+import { StorageProvider } from '../storageProvider';
+import { message } from 'antd';
 
 export abstract class BaseCollection<T> {
   private readonly storageType: StorageType;

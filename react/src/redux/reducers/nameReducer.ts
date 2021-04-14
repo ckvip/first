@@ -1,20 +1,19 @@
-import { BaseAction } from "../actions/baseAction";
-import { Constants } from "../../shared/constants";
+import { BaseAction } from '../actions/baseAction';
 import { AppState } from '../../shared/models/appState';
+import {ConstNameAdd, ConstNameRemove, ConstNameSetFilter} from '../../shared/constants';
 
 const nameReducer = (state = {} as AppState, action: BaseAction): AppState => {
-  const types = Constants().actionTypes;
   switch (action?.type) {
-    case types.nameAdd:
+    case ConstNameAdd:
       state.names.add(action.payload);
       return {...state};
-    case types.nameRemove:
+    case ConstNameRemove:
       state.names.remove(action.payload);
       return {...state};
-    case types.nameSetFilter:
-      return {...state, ...{nameFilter: action.payload}}
+    case ConstNameSetFilter:
+      return {...state, ...{nameFilter: action.payload}};
     default:
-      return state;
+      return state ;
   }
 };
 
