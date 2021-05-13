@@ -1,0 +1,104 @@
+Configuration:
+  status: ERROR
+  Properties:
+    Property:
+      - name: log.pattern
+        value: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
+      - name: log.path
+        value: "logs-dev"
+      - name: project.name
+        value: "naming-rule"
+  appenders:
+    Console:
+      name: LogToConsole
+      PatternLayout:
+        Pattern: ${log.pattern}
+
+    RollingFile:
+      - name: debugLog
+        fileName: ${log.path}/${project.name}-debug.log
+        filePattern: "${log.path}/$${date:yyyy-MM}/${project.name}-debug-%d{MM-dd-yyyy}-%i.log.gz"
+        Filters:
+          ThresholdFilter:
+            - level: info
+              onMatch: DENY
+              onMismatch: NEUTRAL
+            - level: debug
+              onMatch: ACCEPT
+              onMismatch: DENY
+        PatternLayout:
+          pattern: ${log.pattern}
+        Policies:
+          SizeBasedTriggeringPolicy:
+            size: 10MB
+        DefaultRollOverStrategy:
+          max: 20
+
+      - name: infoLog
+        fileName: ${log.path}/${project.name}-info.log
+        filePattern: "${log.path}/$${date:yyyy-MM}/${project.name}-info-%d{MM-dd-yyyy}-%i.log.gz"
+        Filters:
+          ThresholdFilter:
+            - level: warn
+              onMatch: DENY
+              onMismatch: NEUTRAL
+            - level: info
+              onMatch: ACCEPT
+              onMismatch: DENY
+        PatternLayout:
+          pattern: ${log.pattern}
+        Policies:
+          SizeBasedTriggeringPolicy:
+            size: 10MB
+        DefaultRollOverStrategy:
+          max: 20
+      - name: warnLog
+        fileName: ${log.path}/${project.name}-warn.log
+        filePattern: "${log.path}/$${date:yyyy-MM}/${project.name}-warn-%d{MM-dd-yyyy}-%i.log.gz"
+        Filters:
+          ThresholdFilter:
+            - level: error
+              onMatch: DENY
+              onMismatch: NEUTRAL
+            - level: warn
+              onMatch: ACCEPT
+              onMismatch: DENY
+        PatternLayout:
+          pattern: ${log.pattern}
+        Policies:
+          SizeBasedTriggeringPolicy:
+            size: 10MB
+        DefaultRollOverStrategy:
+          max: 20
+      - name: errorLog
+        fileName: ${log.path}/${project.name}-error.log
+        filePattern: "${log.path}/$${date:yyyy-MM}/${project.name}-error-%d{MM-dd-yyyy}-%i.log.gz"
+        Filters:
+          ThresholdFilter:
+            - level: error
+        PatternLayout:
+          pattern: ${log.pattern}
+        Policies:
+          SizeBasedTriggeringPolicy:
+            size: 10MB
+        DefaultRollOverStrategy:
+          max: 20
+
+  Loggers:
+    logger:
+      - name: org.namingrule
+        level: debug
+        additivity: false
+        AppenderRef:
+          - ref: LogToConsole
+          - ref: debugLog
+          - ref: infoLog
+          - ref: warnLog
+          - ref: errorLog
+      - name: org.springframework.boot.autoconfigure.logging
+        level: Error
+
+    Root:
+      level: error
+      AppenderRef:
+        ref: LogToConsole

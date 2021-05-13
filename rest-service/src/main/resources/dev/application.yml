@@ -1,0 +1,19 @@
+debug: true
+server:
+  port: 9000
+  servlet:
+    context-path: /api
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: GGrBkLOb1T
+    password: 0N4BKWDsxg
+    url: jdbc:mysql://remotemysql.com:3306/GGrBkLOb1T?createDatabaseIfNotExist=true&useSSL=false
+    hikari:
+      max-lifetime: 30000
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  profiles:
+    active: dev
