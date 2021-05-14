@@ -37,16 +37,14 @@ public class GreetingController {
     public Greeting update(@PathVariable long id, @RequestBody Greeting post) {
         Greeting origin = this.service.getById(id);
         origin.update(post);
-        this.service.save(origin);
-        return origin;
+        return this.service.save(origin);
     }
 
     @PostMapping
     public Greeting create(@RequestBody Greeting post) {
         String content = String.format("Hello, %s!", post.getMessage());
         Greeting greeting = new Greeting(content);
-        this.service.save(greeting);
-        return greeting;
+        return this.service.save(greeting);
     }
 
     @DeleteMapping("/{id}")

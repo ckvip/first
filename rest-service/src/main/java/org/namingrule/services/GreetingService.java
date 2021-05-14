@@ -37,9 +37,9 @@ public class GreetingService {
         return this.repository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
-    public void save(Greeting greeting) {
+    public Greeting save(Greeting greeting) {
         try {
-            this.repository.save(greeting);
+            return this.repository.save(greeting);
         } catch (RuntimeException ex) {
             throw new DatabaseOperationException("fail to save greeting", ex);
         }

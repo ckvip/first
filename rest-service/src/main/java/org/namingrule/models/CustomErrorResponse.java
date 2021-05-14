@@ -6,11 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 public class CustomErrorResponse {
-    private final String path;
-    private final Integer code;
-    private final String method;
-    private final String message;
-    private final Date requestTime;
+    private String path;
+    private Integer code;
+    private String method;
+    private String message;
+    private Date requestTime;
+
+    public CustomErrorResponse() {
+    }
 
     public CustomErrorResponse(HttpServletRequest request, AppException ex) {
         this.method = request.getMethod();
